@@ -113,6 +113,16 @@ X does not have valid feature names, but GradientBoostingClassifier was fitted w
 ```
 **Solution**: Run the complete notebook (`notebooks/diabetes_prediction_complete.ipynb`) to generate the required model files.
 
+**No module named '_loss' error:**
+```
+❌ Error making prediction: No module named '_loss'
+```
+**Solution**: This is a scikit-learn version compatibility issue between your local environment and deployment environment. Make sure your requirements.txt specifies the exact scikit-learn version (scikit-learn==1.3.0) and add setuptools and wheel to ensure proper installation:
+```
+setuptools>=65.5.1
+wheel>=0.38.0
+scikit-learn==1.3.0
+```
 
 ## 🎯 Key Project Highlights
 
