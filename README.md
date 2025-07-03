@@ -182,3 +182,45 @@ X does not have valid feature names, but GradientBoostingClassifier was fitted w
 #
 
 **🩺 Medical Disclaimer**: This tool is for educational and research purposes only. It should not be used as a substitute for professional medical diagnosis. Always consult with qualified healthcare providers for medical decisions.
+
+## 🚀 Azure Deployment
+
+This project can be deployed to Microsoft Azure in several ways. For detailed instructions, see the [AZURE_DEPLOYMENT.md](AZURE_DEPLOYMENT.md) file.
+
+### Quick Deployment Steps:
+
+1. **Prerequisites**:
+   - Azure account
+   - Azure CLI installed
+   - Docker installed
+
+2. **Option 1: Azure Container Apps (Recommended)**
+   ```powershell
+   # Build and push the Docker image
+   docker build -t yourregistry.azurecr.io/diabetes-prediction:latest .
+   
+   # Deploy to Azure Container Apps
+   az containerapp up \
+     --name diabetes-prediction-app \
+     --resource-group your-resource-group \
+     --location eastus \
+     --image yourregistry.azurecr.io/diabetes-prediction:latest \
+     --target-port 8501 \
+     --ingress external
+   ```
+
+3. **Option 2: Azure App Service**
+   ```powershell
+   # Deploy to App Service
+   az webapp create \
+     --resource-group your-resource-group \
+     --plan your-app-service-plan \
+     --name your-app-name \
+     --deployment-container-image-name yourregistry.azurecr.io/diabetes-prediction:latest
+   ```
+
+4. **CI/CD Setup**:
+   - GitHub Actions workflow is provided in `.github/workflows/azure-deploy.yml`
+   - Set up the required secrets in your GitHub repository
+
+For more details on monitoring, cost optimization, and troubleshooting, refer to the [full deployment guide](AZURE_DEPLOYMENT.md).
